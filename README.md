@@ -45,6 +45,39 @@ DeFi-Empire is a decentralized finance (DeFi) game inspired by DeFi Kingdoms. Th
 5. **Interact with Contracts**:
    - Test the deployed contracts to ensure they function correctly.
 
+---
+
+### Setting up Avalanche CLI and Deploying Subnet
+
+1. **Install AvalancheGo**:
+   Download from [AvalancheGo Releases](https://github.com/ava-labs/avalanchego/releases) and install it.
+
+   ```bash
+   tar -xvf avalanchego-linux-amd64.tar.gz
+   sudo mv avalanchego /usr/local/bin/
+   ```
+
+2. **Install Avalanche-CLI**:
+   Clone and build:
+
+   ```bash
+   git clone https://github.com/ava-labs/avalanche-cli.git
+   cd avalanche-cli
+   go build -o avalanche-cli main.go
+   sudo mv avalanche-cli /usr/local/bin/avalanche
+   ```
+
+3. **Create and Deploy Subnet**:
+
+   ```bash
+   avalanche subnet create mySubnet
+   avalanche network deploy --local mySubnet
+   ```
+
+4. **Connect MetaMask**:  
+   Use your Subnet's RPC URL in MetaMask.
+
+
 ## License
 
 This project is licensed under the MIT License.
