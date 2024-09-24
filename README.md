@@ -27,12 +27,12 @@ DeFi-Empire is a decentralized finance (DeFi) game inspired by DeFi Kingdoms. Th
 
 1. **Create Avalanche Subnet**:
    ```bash
-   avalanche subnet create circle
+   avalanche subnet create mysubnet
    ```
 
 2. **Deploy Subnet**:
    ```bash
-   avalanche subnet deploy circle
+   avalanche subnet deploy mysubnet
    ```
 
 3. **Configure Metamask**:
