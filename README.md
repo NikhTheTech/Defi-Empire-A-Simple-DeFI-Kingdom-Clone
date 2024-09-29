@@ -82,7 +82,7 @@ DeFi-Empire is a decentralized finance (DeFi) game inspired by DeFi Kingdoms. Th
 
    avalanche subnet describe mysubnet
    
-   avalanche network deploy mySubnet
+   avalanche subnet deploy mySubnet
    ```
 
 4. **Connect MetaMask**:  
