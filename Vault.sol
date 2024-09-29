@@ -1,19 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-interface IERC20 {
+
+interface ERC20 {
     function totalSupply() external view returns (uint);
 
     function balanceOf(address account) external view returns (uint);
 
     function transfer(address recipient, uint amount) external returns (bool);
 
-    function allowance(
-        address owner,
-        address spender
-    ) external view returns (uint);
+    function allowance(address owner, address spender) external view returns (uint);
 
-    function approve(address spender, uint amount) external returns (bool);
+
+    function approve(address owner, address spender, uint amount) external returns (bool);
 
     function transferFrom(
         address sender,
@@ -26,15 +25,18 @@ interface IERC20 {
 }
 
 contract Vault {
-    IERC20 public immutable token;
+    ERC20 public immutable token;
 
     uint public totalSupply;
     mapping(address => uint) public balanceOf;
 
     constructor(address _token) {
-        token = IERC20(_token);
+        token = ERC20(_token);
     }
 
+    function return_contract_address() public view returns(address){
+        return address(this);
+    }
     function _mint(address _to, uint _shares) private {
         totalSupply += _shares;
         balanceOf[_to] += _shares;
@@ -45,19 +47,24 @@ contract Vault {
         balanceOf[_from] -= _shares;
     }
 
-    function deposit(uint _amount) external {
+    function deposit(uint _amount) external  {
+        
         uint shares;
+        uint balanceBefore = token.balanceOf(address(this));
         if (totalSupply == 0) {
             shares = _amount;
         } else {
-            shares = (_amount * totalSupply) / token.balanceOf(address(this));
+            require(balanceBefore > 0, "Vault: balance must be greater than 0");
+            shares = (_amount * totalSupply) / balanceBefore;
         }
 
         _mint(msg.sender, shares);
+        token.approve(msg.sender, address(this), _amount); // change 2
         token.transferFrom(msg.sender, address(this), _amount);
     }
 
     function withdraw(uint _shares) external {
+     
         uint amount = (_shares * token.balanceOf(address(this))) / totalSupply;
         _burn(msg.sender, _shares);
         token.transfer(msg.sender, amount);
