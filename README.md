@@ -69,8 +69,6 @@ DeFi-Empire is a decentralized finance (DeFi) game inspired by DeFi Kingdoms. Th
    curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
    
    export PATH=~/bin:$PATH
-
-   curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s -- -b <relative directory>
    ```
 
 3. **Create and Deploy Subnet**:
